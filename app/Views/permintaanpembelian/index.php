@@ -32,27 +32,14 @@
                                 <td><?= $row['satuan'] ?></td>
                                 <td>Rp.<?= number_format($row['harga'], 0, ',', '.') ?></td>
                                 <td>
-                                    <a href="<?= site_url('permintaanpembelian/edit/' . $row['id_permintaan']) ?>" class="btn btn-warning">Edit</a> | <a href="<?= site_url('permintaanpembelian/delete/' . $row['id_permintaan']) ?>" class="btn btn-danger">Delete</a>
+                                    <a href="<?= site_url('permintaanpembelian/edit/' . $row['id_permintaan']) ?>" class="btn btn-warning">Edit</a>
+                                    <a href="<?= site_url('permintaanpembelian/delete/' . $row['id_permintaan']) ?>" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')" class="btn btn-danger">Delete</a>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
                 </table>
             </div>
-            <!-- <form action="post" action="<?= site_url('akun1') ?>">
-                <div class="form-group">
-                    <label>Kode Akun 1</label>
-                    <input type="text" class="form-control" name="kode_akun1" placeholder="Kode akun">
-                </div>
-                <div class="form-group">
-                    <label>Nama Akun 1</label>
-                    <input type="text" class="form-control" name="nama_akun1" placeholder="Nama akun">
-                </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-success">Save</button>
-                    <button type="reset" class="btn btn-secondary">Reset</button>
-                </div>
-            </form> -->
         </div>
     <div class="card-footer text-right">
 

@@ -2,9 +2,9 @@
               <li class="nav-item dropdown">
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Dashboard</span></a>
                 <ul class="dropdown-menu">
-                  <li><a class="nav-link" href=<?=site_url('akun1')?>>Akun - 1</a></li>
-                  <li><a class="nav-link" href="#">Akun - 2</a></li>
-                  <li><a class="nav-link" href="#">Akun - 3</a></li>
+                  <li><a class="nav-link" href=<?=site_url('akun1')?>>Akun</a></li>
+                  <li><a class="nav-link" href="<?=site_url('permintaanpembelian')?>">Permintaan</a></li>
+                  <li><a class="nav-link" href="<?=site_url('persetujuan')?>">Persetujuan</a></li>
                 </ul>
               </li>
               <li class="menu-header">Aktiviti</li>

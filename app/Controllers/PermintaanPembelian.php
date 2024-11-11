@@ -1,18 +1,22 @@
 <?php
 
 namespace App\Controllers;
+
 use App\Models\PermintaanPembelianModel;
 use App\Models\Akun1Model;
+use App\Models\PersetujuanModel;
 
 class PermintaanPembelian extends BaseController
 {
     protected $permintaanModel;
     protected $akun1Model;
+    protected $persetujuanModel;
 
     public function __construct()
     {
         $this->permintaanModel = new PermintaanPembelianModel();
         $this->akun1Model = new Akun1Model();
+        $this->persetujuanModel = new PersetujuanModel();
     }
 
     public function index()
@@ -29,6 +33,7 @@ class PermintaanPembelian extends BaseController
 
     public function store()
     {
+        // Simpan data ke tabel permintaan_pembelian
         $this->permintaanModel->save([
             'no_permintaan' => $this->request->getPost('no_permintaan'),
             'tanggal' => $this->request->getPost('tanggal'),
@@ -39,9 +44,15 @@ class PermintaanPembelian extends BaseController
             'harga' => $this->request->getPost('harga'),
         ]);
 
+        $id_permintaan = $this->permintaanModel->getInsertID();
+
+        $this->persetujuanModel->save([
+            'id_permintaan' => $id_permintaan,
+            'status' => 'Disapprove'
+        ]);
+
         return redirect()->to('/permintaanpembelian');
     }
-    // Controller/PermintaanPembelian.php
 
     public function edit($id)
     {
@@ -67,8 +78,11 @@ class PermintaanPembelian extends BaseController
 
     public function delete($id)
     {
+        $this->persetujuanModel->where('id_permintaan', $id)->delete();
+    
         $this->permintaanModel->delete($id);
-        return redirect()->to('/permintaanpembelian');
+    
+        return redirect()->to('/permintaanpembelian')->with('message', 'Data berhasil dihapus');
     }
-
+    
 }

@@ -45,9 +45,8 @@
                     <label>Harga</label>
                     <input type="number" class="form-control" name="harga" required><br>
                 </div>
-                <div class="form-group">
-                    <button type="submit" class="form-control">Simpan</button>
-                </div>
+                <button type="submit" class="btn btn-primary">Save</button>
+                <a class="btn btn-danger" href="<?= site_url('permintaanpembelian') ?>">Cancel</a>
             </form>
         </div>
     <div class="card-footer text-right">
