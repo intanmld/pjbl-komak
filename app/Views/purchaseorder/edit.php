@@ -13,7 +13,15 @@
                 <form action="<?= site_url('purchaseorder/update/' . $purchaseOrder['id_po']) ?>" method="post">
                     <div class="form-group">
                         <label for="penanggung_jawab">Penanggung Jawab</label>
-                        <input type="text" name="penanggung_jawab" class="form-control" value="<?= $purchaseOrder['penanggung_jawab'] ?>" required>
+                        <select name="penanggung_jawab" id="penanggung_jawab" class="form-control" required>
+                            <option value="">Pilih Penanggung Jawab</option>
+                            <?php foreach ($akun1List as $akun): ?>
+                                <option value="<?= $akun['nama_akun1']; ?>" 
+                                    <?= $akun['nama_akun1'] == $purchaseOrder['penanggung_jawab'] ? 'selected' : ''; ?>>
+                                    <?= $akun['nama_akun1']; ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="supplier">Supplier</label>

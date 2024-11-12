@@ -22,7 +22,15 @@ class Persetujuan extends BaseController
 
     public function index()
     {
-        $data['persetujuan'] = $this->persetujuanModel->getAllData();
+        $persetujuanList = $this->persetujuanModel->getAllData();
+
+        // Format tanggal di dalam persetujuanList
+        foreach ($persetujuanList as &$persetujuan) {
+            if (isset($persetujuan['tanggal'])) {
+                $persetujuan['tanggal'] = (new \DateTime($persetujuan['tanggal']))->format('d-m-Y');
+            }
+        }
+        $data['persetujuan'] = $persetujuanList;
         return view('persetujuan/index', $data);
     }
 

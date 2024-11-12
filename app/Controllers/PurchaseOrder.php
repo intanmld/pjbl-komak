@@ -20,6 +20,7 @@ class PurchaseOrder extends BaseController
         $this->purchaseOrderModel = new PurchaseOrderModel();
         $this->persetujuanModel = new PersetujuanModel();
         $this->permintaanPembelianModel = new PermintaanPembelianModel();
+        $this->akun1Model = new Akun1Model();
     }
 
     // Menampilkan daftar Purchase Order
@@ -77,6 +78,12 @@ class PurchaseOrder extends BaseController
     
         // Ambil data persetujuan berdasarkan id_persetujuan yang ada di purchase order
         $persetujuan = $this->persetujuanModel->where('id_persetujuan', $purchaseOrder['id_persetujuan'])->first();
+
+        // Ambil data permintaan pembelian berdasarkan id_permintaan dari persetujuan
+        $permintaanPembelian = $this->permintaanPembelianModel
+        ->select('id_permintaan, no_permintaan, tanggal, nama_barang, jumlah, satuan, harga') // Pastikan mengambil no_permintaan
+        ->where('id_permintaan', $persetujuan['id_permintaan'])
+        ->first();
         
         // Ambil data permintaan pembelian berdasarkan id_permintaan dari persetujuan
         $permintaanPembelian = $this->permintaanPembelianModel->where('id_permintaan', $persetujuan['id_permintaan'])->first();
@@ -84,8 +91,12 @@ class PurchaseOrder extends BaseController
         // Ambil nama pemohon dari tabel akun1s berdasarkan pemohon di permintaan_pembelian
         $pemohon = $this->akun1Model->find($permintaanPembelian['pemohon']);
     
-        // Format No PO (misal: PR-001)
-        $noPoFormatted = 'PR-' . str_pad($purchaseOrder['id_po'], 3, '0', STR_PAD_LEFT);
+        // Format No PO (misal: PO-001)
+        $noPoFormatted = 'PO-' . str_pad($purchaseOrder['id_po'], 3, '0', STR_PAD_LEFT);
+
+        $penanggungJawab = $this->akun1Model->find($purchaseOrder['penanggung_jawab']);
+
+        $tanggalFormatted = (new \DateTime($permintaanPembelian['tanggal']))->format('d-m-Y');
     
         // Kirim data ke view
         return view('purchaseorder/detail', [
@@ -93,20 +104,31 @@ class PurchaseOrder extends BaseController
             'permintaanPembelian' => $permintaanPembelian,
             'pemohon' => $pemohon,
             'persetujuan' => $persetujuan,
-            'noPoFormatted' => $noPoFormatted
+            'noPoFormatted' => $noPoFormatted,
+            'tanggalFormatted' => $tanggalFormatted,
+            'penanggungJawab' => $penanggungJawab
         ]);
     }
     
     
-    public function edit($id_po) {
+    public function edit($id_po)
+    {
         $purchaseOrder = $this->purchaseOrderModel->find($id_po);
         
         if (!$purchaseOrder) {
             throw new \CodeIgniter\Exceptions\PageNotFoundException('Data tidak ditemukan');
         }
-
-        return view('purchaseorder/edit', ['purchaseOrder' => $purchaseOrder]);
+    
+        // Mengambil daftar akun1 untuk dropdown penanggung jawab
+        $akun1List = $this->akun1Model->findAll();
+    
+        // Kirim data ke view, termasuk daftar akun1
+        return view('purchaseorder/edit', [
+            'purchaseOrder' => $purchaseOrder,
+            'akun1List' => $akun1List
+        ]);
     }
+    
 
     public function update($id_po) {
         // Ambil data dari form input

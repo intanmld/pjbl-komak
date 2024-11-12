@@ -21,7 +21,18 @@ class PermintaanPembelian extends BaseController
 
     public function index()
     {
-        $data['permintaan'] = $this->permintaanModel->getAllData();
+        // Ambil semua data permintaan
+        $permintaanList = $this->permintaanModel->getAllData();
+
+        // Format tanggal ke day-month-year
+        foreach ($permintaanList as &$permintaan) {
+            if (isset($permintaan['tanggal'])) {
+                $permintaan['tanggal'] = (new \DateTime($permintaan['tanggal']))->format('d-m-Y');
+            }
+        }
+        
+        $data['permintaan'] = $permintaanList;
+
         return view('permintaanpembelian/index', $data);
     }
 
