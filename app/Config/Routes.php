@@ -20,3 +20,11 @@ $routes->get('sync-persetujuan', 'SyncPersetujuan::syncData');
 $routes->get('/persetujuan', 'Persetujuan::index');
 $routes->post('/persetujuan/update_status/(:num)', 'Persetujuan::update/$1');
 $routes->get('/persetujuan/delete/(:num)', 'Persetujuan::delete/$1');
+$routes->get('/persetujuan/approve/(:num)', 'Persetujuan::approve/$1');
+
+$routes->get('/purchaseorder', 'PurchaseOrder::index');
+$routes->get('/purchaseorder/detail/(:num)', 'PurchaseOrder::detail/$1');
+$routes->get('/purchaseorder/edit/(:num)', 'PurchaseOrder::edit/$1');
+$routes->get('/purchaseorder/delete/(:num)', 'PurchaseOrder::delete/$1');
+
+

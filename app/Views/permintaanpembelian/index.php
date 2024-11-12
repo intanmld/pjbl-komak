@@ -5,6 +5,18 @@
     <div class="section-header">
         <a href="<?= site_url('permintaanpembelian/create') ?>" class="btn btn-primary">Tambah Permintaan Pembelian</a>
     </div>
+    <!-- Notifikasi di bagian atas layar -->
+<?php if (session()->getFlashdata('error')): ?>
+    <div id="notification" class="notification alert alert-danger">
+        <?= session()->getFlashdata('error') ?>
+    </div>
+<?php endif; ?>
+
+<?php if (session()->getFlashdata('success')): ?>
+    <div id="notification" class="notification alert alert-success">
+        <?= session()->getFlashdata('success') ?>
+    </div>
+<?php endif; ?>
 
     <div class="section-body">
     <div class="card">
@@ -47,5 +59,32 @@
 </div>
     </div>
 </section>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const notification = document.getElementById("notification");
+        if (notification) {
+            setTimeout(() => {
+                notification.style.opacity = "0";
+            }, 2000);
 
+            setTimeout(() => {
+                notification.remove();
+            }, 2500);
+        }
+    });
+</script>
+<style>
+    .notification {
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1000;
+        width: 80%;
+        max-width: 400px;
+        text-align: center;
+        opacity: 1;
+        transition: opacity 0.5s ease;
+    }
+</style>
 <?= $this->endSection(); ?>

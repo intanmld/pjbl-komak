@@ -78,11 +78,20 @@ class PermintaanPembelian extends BaseController
 
     public function delete($id)
     {
-        $this->persetujuanModel->where('id_permintaan', $id)->delete();
-    
-        $this->permintaanModel->delete($id);
-    
-        return redirect()->to('/permintaanpembelian')->with('message', 'Data berhasil dihapus');
+        // Cek apakah permintaan terkait sudah di-approve di tabel persetujuan
+        $persetujuan = $this->persetujuanModel->where('id_permintaan', $id)->first();
+        
+        if ($persetujuan && $persetujuan['status'] === 'Approved') {
+            // Jika sudah di-approve, set flashdata error
+            session()->setFlashdata('error', 'Tidak bisa delete, Data sudah di Approved');
+        } else {
+            // Jika belum di-approve, hapus data
+            $this->permintaanModel->delete($id);
+            session()->setFlashdata('success', 'Data berhasil dihapus');
+        }
+        
+        // Redirect ke halaman permintaan pembelian
+        return redirect()->to('/permintaanpembelian');
     }
     
 }

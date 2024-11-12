@@ -5,6 +5,7 @@
                   <li><a class="nav-link" href=<?=site_url('akun1')?>>Akun</a></li>
                   <li><a class="nav-link" href="<?=site_url('permintaanpembelian')?>">Permintaan</a></li>
                   <li><a class="nav-link" href="<?=site_url('persetujuan')?>">Persetujuan</a></li>
+                  <li><a class="nav-link" href="<?=site_url('purchaseorder')?>">PO</a></li>
                 </ul>
               </li>
               <li class="menu-header">Aktiviti</li>
