@@ -8,33 +8,32 @@ class CreatePersetujuanTable extends Migration
 {
     public function up()
     {
+        // Membuat tabel persetujuan
         $this->forge->addField([
             'id_persetujuan' => [
                 'type'           => 'INT',
-                'unsigned'       => true,
+                'constraint'     => 11,
                 'auto_increment' => true,
             ],
             'id_permintaan' => [
-                'type'       => 'INT',
-                'unsigned'   => true,
+                'type'           => 'INT',
+                'constraint'     => 11,
+                'unsigned'       => true,
             ],
             'status' => [
-                'type'       => 'ENUM',
-                'constraint' => ['Approved', 'Disapprove'],
-                'default'    => 'Disapprove',
+                'type'           => 'ENUM',
+                'constraint'     => "'Approved','Disapprove'",
+                'default'        => 'Disapprove',
             ],
         ]);
-
-        $this->forge->addKey('id_persetujuan', true);
-        
-        // Tambahkan foreign key
+        $this->forge->addPrimaryKey('id_persetujuan');
         $this->forge->addForeignKey('id_permintaan', 'permintaan_pembelian', 'id_permintaan', 'CASCADE', 'CASCADE');
-        
         $this->forge->createTable('persetujuan');
     }
 
     public function down()
     {
+        // Menghapus tabel persetujuan
         $this->forge->dropTable('persetujuan');
     }
 }

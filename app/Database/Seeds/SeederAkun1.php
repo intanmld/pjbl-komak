@@ -11,23 +11,23 @@ class SeederAkun1 extends Seeder
         $data = [
             [
                 'kode_akun1' => 1,
-                'nama_akun1'    => 'Aktiva',
+                'nama_akun1'    => 'Aziz',
             ],
             [
                 'kode_akun1' => 2,
-                'nama_akun1'    => 'Kewajiban',
+                'nama_akun1'    => 'Nyimas',
             ],
             [
                 'kode_akun1' => 3,
-                'nama_akun1'    => 'Modal',
+                'nama_akun1'    => 'Liana',
             ],
             [
                 'kode_akun1' => 4,
-                'nama_akun1'    => 'Pendapatan',
+                'nama_akun1'    => 'Resty',
             ],
             [
                 'kode_akun1' => 5,
-                'nama_akun1'    => 'Beban',
+                'nama_akun1'    => 'Intan',
             ],
         ];
         // Simple Queries
