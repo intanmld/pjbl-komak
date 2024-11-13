@@ -6,7 +6,10 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 $routes->setAutoRoute(true);
-$routes->get('/', 'Home::index');
+$routes->get('/login', 'Login::index');
+$routes->get('/', 'Home::index', ['filter' => 'login']);
+$routes->get('logout', 'Login::logout');
+
 $routes->get('/akun1', 'Akun1::index');
 $routes->get('akun1/edit/(:num)', 'Akun1::edit/$1');
 $routes->post('akun1/create', 'Akun1::create');
