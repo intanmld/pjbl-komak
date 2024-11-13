@@ -42,7 +42,7 @@
                                 <td><?= $row['nama_barang'] ?></td>
                                 <td><?= $row['jumlah'] ?></td>
                                 <td><?= $row['satuan'] ?></td>
-                                <td>Rp.<?= number_format($row['harga'], 0, ',', '.') ?></td>
+                                <td>Rp<?= number_format($row['harga'], 0, ',', '.') ?></td>
                                 <td>
                                     <a href="<?= site_url('permintaanpembelian/edit/' . $row['id_permintaan']) ?>" class="btn btn-warning">Edit</a>
                                     <a href="<?= site_url('permintaanpembelian/delete/' . $row['id_permintaan']) ?>" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')" class="btn btn-danger">Delete</a>

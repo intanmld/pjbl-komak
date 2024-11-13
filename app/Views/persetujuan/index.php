@@ -44,7 +44,7 @@
                                     <td><?= $row['nama_barang'] ?></td>
                                     <td><?= $row['jumlah'] ?></td>
                                     <td><?= $row['satuan'] ?></td>
-                                    <td>Rp.<?= number_format($row['harga'], 0, ',', '.') ?></td>
+                                    <td>Rp<?= number_format($row['harga'], 0, ',', '.') ?></td>
                                     <td>
                                         <form action="<?= site_url('persetujuan/update_status/' . $row['id_persetujuan']) ?>" method="post">
                                             <!-- Mengubah warna dropdown berdasarkan status -->
