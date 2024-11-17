@@ -6,3 +6,10 @@
  */
 
 /*# sourceMappingURL=custom.css.map */
+.judul{
+    background-color: #32325d;
+    font-style: italic;
+    font-weight: bold;
+    text-align: right;
+    color: rgb(222, 228, 228);
+}

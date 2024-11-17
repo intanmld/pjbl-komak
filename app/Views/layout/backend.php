@@ -1,10 +1,10 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-  <title>Blank Page &mdash; Stisla</title>
+  <title>Kelompok 2 &mdash; Penguasa Bumi</title>
 
   <!-- General CSS Files -->
   <link rel="stylesheet" href="<?= base_url() ?>/template/node_modules/bootstrap/dist/css/bootstrap.min.css">
@@ -27,17 +27,17 @@
             <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a></li>
             <li><a href="#" data-toggle="search" class="nav-link nav-link-lg d-sm-none"><i class="fas fa-search"></i></a></li>
           </ul>
-          
+
         </form>
-        <ul class="navbar-nav navbar-right">  
+        <ul class="navbar-nav navbar-right">
           <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-            <img alt="image" src="<?=base_url()?>/template/assets/img/avatar/avatar-1.png" class="rounded-circle mr-1">
-            <div class="d-sm-none d-lg-inline-block">Hi, User</div></a>
+              <img alt="image" src="<?= base_url() ?>/template/assets/img/avatar/default.png" class="rounded-circle mr-1">
+              <div class="d-sm-none d-lg-inline-block">Hi, Penguasa Bumi</div>
+            </a>
             <div class="dropdown-menu dropdown-menu-right">
               <div class="dropdown-divider"></div>
-              <a href="<?= site_url('logout') ?>" class="dropdown-item has-icon text-danger">
-                <i class="fas fa-sign-out-alt"></i> Logout
-              </a>
+              <a href="http://localhost/myweb" class="dropdown-item has-icon text-danger"><i class="fas fa-sign-out-alt"></i>Logout</a>
+              <a href="/logout" class="dropdown-item has-icon text-danger"><i class="fas fa-sign-out-alt"></i>Logout</a>
             </div>
           </li>
         </ul>
@@ -45,20 +45,17 @@
       <div class="main-sidebar">
         <aside id="sidebar-wrapper">
           <div class="sidebar-brand">
-            <a href="#">Akuntansi Web</a>
-          </div>
-          <div class="sidebar-brand sidebar-brand-sm">
-            <a href="index.html">St</a>
+            <a href="#">Sistem Purchase Order</a>
           </div>
           <ul class="sidebar-menu">
-          <?= $this->include("layout/menu"); ?>
-            </ul>
+            <?= $this->include("layout/menu"); ?>
+          </ul>
 
-            <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
-              <a href="https://getstisla.com/docs" class="btn btn-primary btn-lg btn-block btn-icon-split">
-                <i class="fas fa-rocket"></i> SIA AKN SV-IPB
-              </a>
-            </div>
+          <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
+            <a href="https://getstisla.com/docs" class="btn btn-primary btn-lg btn-block btn-icon-split">
+              <i class="fas fa-rocket"></i> ADMIN PENGUASA BUMI
+            </a>
+          </div>
         </aside>
       </div>
 
@@ -68,7 +65,7 @@
       </div>
       <footer class="main-footer">
         <div class="footer-left">
-          Copyright &copy; 2024 <div class="bullet"></div> Design By <a href="https://nauval.in/">PENGUASA BUMI</a>
+          Copyright &copy; 2024 <div class="bullet"></div> Design By <a href="https://nauval.in/">Kelompok 2</a>
         </div>
         <div class="footer-right">
           2.3.0
@@ -88,9 +85,10 @@
   <!-- JS Libraies -->
 
   <!-- Template JS File -->
-  <script src="<?=base_url()?>/template/assets/js/scripts.js"></script>
-  <script src="<?=base_url()?>/template/assets/js/custom.js"></script>
+  <script src="<?= base_url() ?>/template/assets/js/scripts.js"></script>
+  <script src="<?= base_url() ?>/template/assets/js/custom.js"></script>
 
   <!-- Page Specific JS File -->
 </body>
+
 </html>

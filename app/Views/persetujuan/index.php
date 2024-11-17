@@ -3,8 +3,9 @@
 <?= $this->section("content"); ?>
 <section class="section">
     <div class="section-header">
-        <h4>Persetujuan Permintaan Pembelian</h4>
+        <h4>Purchase Approval</h4>
     </div>
+
     <!-- Notifikasi di bagian atas layar -->
     <?php if (session()->getFlashdata('error')): ?>
         <div id="notification" class="notification alert alert-danger">
@@ -24,28 +25,34 @@
                     <table class="table table-striped table-md">
                         <thead>
                             <tr>
-                                <th>No Permintaan</th>
-                                <th>Tanggal</th>
-                                <th>Pemohon</th>
-                                <th>Nama Barang</th>
-                                <th>Jumlah</th>
-                                <th>Satuan</th>
-                                <th>Harga</th>
-                                <th>Status</th>
-                                <th>Action</th>
+                                <th class="text-center">No Permintaan</th>
+                                <th class="text-center">Tanggal</th>
+                                <th class="text-center">Pemohon</th>
+                                <th class="text-center">Nama Barang</th>
+                                <th class="text-center">Jumlah</th>
+                                <th class="text-center">Satuan</th>
+                                <th class="text-center">Harga Per Unit</th>
+                                <th class="text-center">Total Harga </th>
+                                <th class="text-center">Persetujuan</th>
+                                <th class="text-center">Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php foreach ($persetujuan as $row): ?>
                                 <tr>
-                                    <td><?= $row['no_permintaan'] ?></td>
-                                    <td><?= $row['tanggal'] ?></td>
-                                    <td><?= $row['pemohon'] ?></td>
-                                    <td><?= $row['nama_barang'] ?></td>
-                                    <td><?= $row['jumlah'] ?></td>
-                                    <td><?= $row['satuan'] ?></td>
-                                    <td>Rp<?= number_format($row['harga'], 0, ',', '.') ?></td>
-                                    <td>
+                                    <td class="text-center"><?= $row['no_permintaan'] ?></td>
+                                    <td class="text-center"><?= $row['tanggal'] ?></td>
+                                    <td class="text-center"><?= $row['pemohon'] ?></td>
+                                    <td class="text-center"><?= $row['nama_barang'] ?></td>
+                                    <td class="text-center"><?= $row['jumlah'] ?></td>
+                                    <td class="text-center"><?= $row['satuan'] ?></td>
+                                    <!-- Harga Per Unit -->
+                                    <td class="text-center">Rp<?= number_format($row['harga'], 0, ", ", ",") ?></td>
+
+                                    <!-- Harga Total (Jumlah x Harga Per Unit) -->
+                                    <td class="text-center">Rp<?= number_format($row['jumlah'] * $row['harga'], 0, ", ", ",") ?></td>
+
+                                    <td class="text-center">
                                         <form action="<?= site_url('persetujuan/update_status/' . $row['id_persetujuan']) ?>" method="post">
                                             <!-- Mengubah warna dropdown berdasarkan status -->
                                             <select name="status" class="form-select <?= ($row['status'] == 'Disapprove') ? 'bg-danger' : 'bg-info' ?>">
@@ -53,17 +60,18 @@
                                                 <option value="Approved" <?= ($row['status'] == 'Approved') ? 'selected' : '' ?>>Approved</option>
                                             </select>
                                     </td>
-                                    <td>
-                                        <button type="submit" class="btn btn-primary">Save</button>
+                                    <td class="text-center" style="width:18%">
+                                        <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Save</button>
                                         </form>
-                                        <a href="<?= site_url('persetujuan/delete/' . $row['id_persetujuan']) ?>" 
-                                           class="btn btn-danger" 
-                                           onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Delete</a>
+                                        <a href="<?= site_url('persetujuan/delete/' . $row['id_persetujuan']) ?>"
+                                            class="btn btn-danger"
+                                            onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')"><i class="fas fa-trash"></i>Delete</a>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>
                     </table>
+                    <thead>*Harga Termasuk Pajak</thead>
                 </div>
             </div>
         </div>
@@ -81,18 +89,23 @@
 
 <style>
     .bg-danger {
-        background-color: #B10202 !important; /* Merah untuk Disapprove */
+        background-color: #B10202 !important;
+        /* Merah untuk Disapprove */
         color: #FFFFFF !important;
     }
+
     .bg-info {
-        background-color: #0A53A8 !important; /* Biru untuk Approved */
+        background-color: #0A53A8 !important;
+        /* Biru untuk Approved */
         color: #FFFFFF !important;
     }
+
     select {
         padding-left: 5px;
         padding-left: 5px;
         border-radius: 15px;
     }
+
     .notification {
         position: fixed;
         top: 20px;
@@ -127,12 +140,14 @@
 <script>
     function approvePersetujuan(id_persetujuan) {
         $.ajax({
-            url: '/persetujuan/updateStatusAjax/' + id_persetujuan,  // Pastikan URL sesuai
+            url: '/persetujuan/updateStatusAjax/' + id_persetujuan, // Pastikan URL sesuai
             method: 'POST',
-            data: { status: 'approved' },  // Kirim status 'approved'
+            data: {
+                status: 'approved'
+            }, // Kirim status 'approved'
             success: function(response) {
                 // Tampilkan pesan yang diterima dari server di konsol
-                console.log(response.message);  // Pesan detail dari server
+                console.log(response.message); // Pesan detail dari server
                 if (response.status === 'success') {
                     console.log('Purchase Order berhasil dibuat');
                 } else {

@@ -13,39 +13,45 @@
                     <table class="table table-striped table-md">
                         <thead>
                             <tr>
-                                <th>No Req</th>
-                                <th>No PO</th>
-                                <th>Tanggal Order</th>
-                                <th>Penanggung Jawab</th>
-                                <th>Supplier</th>
-                                <th>Nama Barang</th>
-                                <th>Jumlah</th>
-                                <th>Satuan</th>
-                                <th>Harga</th>
-                                <th>Action</th>
+                                <th class="text-center">No Permintaan</th>
+                                <th class="text-center">No Pengiriman</th>
+                                <th class="text-center">Tanggal Order</th>
+                                <th class="text-center">Penanggung Jawab</th>
+                                <th class="text-center">Supplier</th>
+                                <th class="text-center">Nama Barang</th>
+                                <th class="text-center">Jumlah</th>
+                                <th class="text-center">Satuan</th>
+                                <th class="text-center">Harga Per Unit</th>
+                                <th class="text-center">Total Harga</th>
+                                <th class="text-center">Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php foreach ($purchaseOrders as $po): ?>
                                 <tr>
-                                    <td><?= $po['no_permintaan'] ?></td>
-                                    <td><?= sprintf('P-%03d', $po['id_po']) ?></td>
-                                    <td><?= $po['tanggal'] ?></td>
-                                    <td><?= $po['penanggung_jawab'] ?: '-' ?></td>
-                                    <td><?= $po['supplier'] ?: '-' ?></td>
-                                    <td><?= $po['nama_barang'] ?></td>
-                                    <td><?= $po['jumlah'] ?></td>
-                                    <td><?= $po['satuan'] ?></td>
-                                    <td>Rp.<?= number_format($po['harga'], 0, ',', '.') ?></td>
-                                    <td>
-                                        <a href="<?= site_url('purchaseorder/detail/' . $po['id_po']) ?>" class="btn btn-info">Detail</a>
-                                        <a href="<?= site_url('purchaseorder/edit/' . $po['id_po']) ?>" class="btn btn-warning">Edit</a>
-                                        <a href="<?= site_url('purchaseorder/delete/' . $po['id_po']) ?>" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Delete</a>
+                                    <td class="text-center"><?= $po['no_permintaan'] ?></td>
+                                    <td class="text-center"><?= sprintf('P-%03d', $po['id_po']) ?></td>
+                                    <td class="text-center"><?= $po['tanggal'] ?></td>
+                                    <td class="text-center"><?= $po['penanggung_jawab'] ?: '-' ?></td>
+                                    <td class="text-center"><?= $po['supplier'] ?: '-' ?></td>
+                                    <td class="text-center"><?= $po['nama_barang'] ?></td>
+                                    <td class="text-center"><?= $po['jumlah'] ?></td>
+                                    <td class="text-center"><?= $po['satuan'] ?></td>
+                                    <!-- Harga Per Unit -->
+                                    <td class="text-center">Rp<?= number_format($po['harga'], 0, ", ", ",") ?></td>
+
+                                    <!-- Harga Total (Jumlah x Harga Per Unit) -->
+                                    <td class="text-center">Rp<?= number_format($po['jumlah'] * $po['harga'], 0, ", ", ",") ?></td>
+                                    <td class="text-center" style="width:18%">
+                                        <a href="<?= site_url('purchaseorder/detail/' . $po['id_po']) ?>" class="btn btn-info"><i class="fas fa-bars btn-small"></i>Detail</a>
+                                        <a href="<?= site_url('purchaseorder/edit/' . $po['id_po']) ?>" class="btn btn-warning"><i class="fas fa-pencil-alt btn-small"></i>Add</a>
+                                        <a href="<?= site_url('purchaseorder/purchaseorderpdf/' . $po['id_po']) ?>" class="btn btn-success">Invoice</a>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>
                     </table>
+                    <thead>*Harga Termasuk Pajak</thead>
                 </div>
             </div>
         </div>

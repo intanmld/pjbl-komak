@@ -35,5 +35,3 @@ $routes->get('/purchaseorder', 'PurchaseOrder::index');
 $routes->get('/purchaseorder/detail/(:num)', 'PurchaseOrder::detail/$1');
 $routes->get('/purchaseorder/edit/(:num)', 'PurchaseOrder::edit/$1');
 $routes->get('/purchaseorder/delete/(:num)', 'PurchaseOrder::delete/$1');
-
-

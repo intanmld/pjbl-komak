@@ -4,7 +4,7 @@
 <?= $this->section("content"); ?>
 <section class="section">
     <div class="section-header">
-        <h1>Edit Permintaan Pembelian</h1>
+        <h1>Add Purchase Order</h1>
     </div>
 
     <div class="section-body">
@@ -16,7 +16,7 @@
                         <select name="penanggung_jawab" id="penanggung_jawab" class="form-control" required>
                             <option value="">Pilih Penanggung Jawab</option>
                             <?php foreach ($akun1List as $akun): ?>
-                                <option value="<?= $akun['nama_akun1']; ?>" 
+                                <option value="<?= $akun['nama_akun1']; ?>"
                                     <?= $akun['nama_akun1'] == $purchaseOrder['penanggung_jawab'] ? 'selected' : ''; ?>>
                                     <?= $akun['nama_akun1']; ?>
                                 </option>
@@ -28,10 +28,10 @@
                         <input type="text" name="supplier" class="form-control" value="<?= $purchaseOrder['supplier'] ?>" required>
                     </div>
                     <div class="form-group">
-                        <label for="keterangan">Keterangan</label>
+                        <label for="keterangan">Keterangan </label>
                         <textarea name="keterangan" class="form-control"><?= $purchaseOrder['keterangan'] ?></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary">Update</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
                 </form>
             </div>
         </div>

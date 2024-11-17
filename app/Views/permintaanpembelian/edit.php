@@ -4,7 +4,7 @@
 <?= $this->section("content"); ?>
 <section class="section">
     <div class="section-header">
-        <h1>Edit Permintaan Pembelian</h1>
+        <h1>Edit Purchase Request</h1>
     </div>
 
     <div class="section-body">
@@ -40,7 +40,7 @@
                         <input type="text" class="form-control" name="satuan" value="<?= $permintaan['satuan'] ?>" required>
                     </div>
                     <div class="form-group">
-                        <label>Harga</label>
+                        <label>Harga Per Unit</label>
                         <input type="number" class="form-control" name="harga" value="<?= $permintaan['harga'] ?>" required>
                     </div>
                     <div class="form-group">
